@@ -1,0 +1,44 @@
+<ul class="nav nav-tabs">
+		         <li  class="btn btn-info animated bounceInLeft" >
+		         	<a ui-sref="persona.menu()">
+		         		 <span class="glyphicon glyphicon-list-alt">&nbsp;</span>
+		         		 Inicio 
+		         	</a>
+		         </li>
+		         <li class="btn btn-info animated bounceInLeft" >
+		         	<a ui-sref="persona.alta()">
+		         		<span class="glyphicon glyphicon-plus-sign">&nbsp;</span>
+		         		Nueva votacion
+		         	</a>
+		         </li>
+		         <li  class="btn btn-info animated bounceInLeft" >
+		         	<a ui-sref="persona.grilla()"> 
+		         		<span class="glyphicon glyphicon-th" >&nbsp;</span>
+		         			Listado de votaciones</a>
+		         </li>
+		         <li  class="btn btn-info animated bounceInLeft" ng-if="isAuthenticated()">
+		         	<a ui-sref="persona.grillaUser()"> 
+		         		<span class="glyphicon glyphicon-th" >&nbsp;</span>
+		         			Listado de usuarios</a>
+		         </li>
+		         <li  class="btn btn-info animated bounceInRight" ng-if="!isAuthenticated()">
+		         	<a ui-sref="persona.login()"> 
+		         		<span class="glyphicon glyphicon-th" >&nbsp;</span>
+		         			Login</a>
+		         </li>
+		         <li  class="btn btn-info animated bounceInRight" ng-if="isAuthenticated()">
+		         	<a ng-click="logout()"> 
+		         		<span class="glyphicon glyphicon-th" >&nbsp;</span>
+		         			Logout</a>
+		         </li>
+		         <li  class="btn btn-info animated bounceInRight">
+		         	<a ui-sref="persona.register()"> 
+		         		<span class="glyphicon glyphicon-th" >&nbsp;</span>
+		         			Registrarse</a>
+		         </li>
+		        	<span id="tituloBarra"  class="animated bounceInRight">1er Parcial Lab 4&nbsp;&nbsp;&nbsp;</span>
+</ul>
+
+<div ui-view name="contenido">
+
+</div>

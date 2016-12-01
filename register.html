@@ -1,0 +1,16 @@
+<div class="container">
+	<div class="page-header">
+		<center> <h1>Registrar un usuario</h1>   </center>
+	</div>
+	<div class="CajaInicio animated bounceInRight">
+		<h1>Complete la siguiente información con sus datos</h1>
+		<form name="FormLogin"  enctype="multipart/form-data" novalidate>
+            
+			<label>Usuario:</label><input type="text" name="user" ng-model="usuario.user" placeholder="ingrese usuario" value="" required/>
+			<label>DNI:</label><input type="text" name="dni" ng-model="usuario.dni" placeholder="ingrese usuario" value="" required/>
+			<label>Contraseña:</label><input type="password" name="pass" ng-model="usuario.pass" placeholder="ingrese password" value="" required/>
+
+			<a class="btn btn-info " name="ingresar" ng-click="Registrar()" ng-disabled="FormLogin.$invalid"><span class="glyphicon glyphicon-save">&nbsp;</span>Registrarse</a>
+		</form>
+	</div>
+</div>

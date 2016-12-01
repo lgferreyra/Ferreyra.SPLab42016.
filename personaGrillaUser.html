@@ -1,0 +1,35 @@
+<div class="container">
+		<div class="page-header">
+			<center><h1>USERS</h1> </center>     
+		</div>
+	  	 
+		           
+					<div class="CajaInicio animated bounceInRight">
+							<h1>Listado de usuarios</h1>
+							<!-- id="listaPersonas" -->
+								
+								<table class='table table-hover table-responsive' id="listaUsuarios">
+									<thead>
+										<tr>
+                                            <th>  DNI        </th>
+                                            <th>  USER       </th>
+											<th ng-if="true">  BORRAR     </th>
+											<th ng-if="true">  MODIFICAR     </th>
+										</tr> 
+									</thead>
+									
+									<tr ng-repeat="user in ListadoUsuarios">
+
+										<td>{{user.dni}}</td>
+										<td>{{user.user}}</td>
+
+										<td ng-if="true"><button class='btn btn-danger' name='Borrar' ng-click="Borrar(user)">   <span class='glyphicon glyphicon-remove-circle'>&nbsp;</span>Borrar</button></td>
+
+										<td ng-if="true"><button class='btn btn-warning' name='Modificar' ng-click="Modificar(user)"><span class='glyphicon glyphicon-edit'>&nbsp;</span>Modificar</button></td>
+					
+									</tr>
+										
+								</table>
+					</div>
+
+		</div>
