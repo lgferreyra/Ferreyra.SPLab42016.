@@ -67,6 +67,24 @@ class Usuario {
 		return $arrPersonas;
 	}
 
+	public static function Modificar($usuario)
+	{
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+        $consulta =$objetoAccesoDato->RetornarConsulta("
+            update usuario 
+            set
+            dni=:dni,
+            user=:user,
+            pass=:pass
+            WHERE id=:id");
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta->bindValue(':id', $usuario['id'], PDO::PARAM_INT);
+        $consulta->bindValue(':dni', $usuario['dni'], PDO::PARAM_STR);
+        $consulta->bindValue(':user', $usuario['user'], PDO::PARAM_STR);
+        $consulta->bindValue(':pass', $usuario['pass'], PDO::PARAM_STR);
+        return $consulta->execute();
+	}
+
 	public static function BorrarUsuario($idParametro)
 	{	
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 

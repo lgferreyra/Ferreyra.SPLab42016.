@@ -5,9 +5,9 @@
 	<div class="CajaInicio animated bounceInRight">
 		<h1>Ingrese su user y pass</h1>
 		<form name="FormLogin"  enctype="multipart/form-data" novalidate>
-			<input type="text" name="user" ng-model="votacion.user" placeholder="ingrese usuario" value="" required/>
-			<input type="text" name="dni" ng-model="votacion.dni" placeholder="ingrese dni" value="" required/>
-			<input type="password" name="password" ng-model="votacion.password" placeholder="ingrese password" value="" required/>
+			<input type="text" name="user" ng-model="persona.user" placeholder="ingrese usuario" value="" required/>
+			<input type="text" name="dni" ng-model="persona.dni" placeholder="ingrese dni" value="" required/>
+			<input type="password" name="password" ng-model="persona.password" placeholder="ingrese password" value="" required/>
 
 			<a class="btn btn-info " name="ingresar" ng-click="Ingresar()" ng-disabled="FormLogin.$invalid"><span class="glyphicon glyphicon-save">&nbsp;</span>Ingresar</a>
 		</form>

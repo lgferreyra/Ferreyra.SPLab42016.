@@ -54,6 +54,9 @@ app.config( function($stateProvider, $urlRouterProvider, $authProvider){
     .state(
       "persona.alta", {
         url:"/alta",
+        params: {
+            votacion: null
+        },
         views:{
           'contenido':{
             templateUrl:"personaAlta.html",
@@ -76,6 +79,9 @@ app.config( function($stateProvider, $urlRouterProvider, $authProvider){
     .state(
       "persona.register", {
         url:"/register",
+        params: {
+            usuario: null
+        },
         views:{
           'contenido':{
             templateUrl:"register.html",

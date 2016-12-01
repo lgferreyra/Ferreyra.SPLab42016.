@@ -20,10 +20,18 @@ app.controller("controlPersonaMenu", function($scope, $state, $auth){
   };
 });
 
-app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $state, $http, votacionFactory){
+app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $state, $http, votacionFactory, $stateParams){
 
-
-  $scope.votacion = {};
+  console.info($stateParams);
+  if($stateParams.votacion==null){
+    $scope.votacion = {};
+    $scope.title = "Nueva Votación";
+  }
+  else
+  {
+    $scope.votacion = $stateParams.votacion;
+    $scope.title = "Modificar Votacion";
+  }
   /*if(!$auth.isAuthenticated()){
     $state.go('persona.login');
   }*/
@@ -90,7 +98,10 @@ app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $stat
 
     $scope.Guardar = function() {
       console.log($scope.votacion);
-      votacionFactory.insertar($scope.votacion)
+
+      //evaluo si es alta o modificacion
+      if($stateParams.votacion==null){
+        votacionFactory.insertar($scope.votacion)
         .then(function(respuesta){
             console.log(respuesta.data);
             $state.go("persona.menu");
@@ -98,6 +109,19 @@ app.controller("controlPersonaAlta", function($scope, FileUploader, $auth, $stat
              function(respuesta){
             console.error(respuesta);
         });
+      } else {
+        votacionFactory.modificar($scope.votacion)
+        .then(function(respuesta){
+            console.log(respuesta.data);
+            $state.go("persona.menu");
+        },
+             function(respuesta){
+            console.error(respuesta);
+        });
+      }
+
+
+      
     }
 
 });
@@ -134,13 +158,9 @@ app.controller("controlPersonaGrilla", function($scope, $http, $auth, $state, vo
 
 
 
-  $scope.Modificar=function(id){
+  $scope.Modificar=function(persona){
     
-    if(!$auth.isAuthenticated()){
-      alert("Usted no posee permisos");
-    } else {
-      console.log("Modificar"+id);
-    }
+    $state.go('persona.alta', {votacion:persona});
   }
 
 });
@@ -153,7 +173,7 @@ app.controller("controlPersonaGrillaUser", function($scope, $http, $auth, $state
   usuarioFactory.traerTodo()
   .then(function(respuesta) {       
 
-         //$scope.ListadoUsuarios = respuesta.data.listado;
+         $scope.ListadoUsuarios = respuesta.data;
          console.log(respuesta.data);
 
     },function errorCallback(response) {
@@ -164,7 +184,7 @@ app.controller("controlPersonaGrillaUser", function($scope, $http, $auth, $state
 
   $scope.Borrar=function(user){
     
-      $http.post('PHP/nexo.php', { datos: {accion :"borrarUser", id: user.id}})
+      usuarioFactory.borrar(user.id)
       .then(function(response){
             console.log(response);
             $state.reload();
@@ -172,6 +192,11 @@ app.controller("controlPersonaGrillaUser", function($scope, $http, $auth, $state
             function(response){
           console.error(response);
       });
+  }
+
+  $scope.Modificar=function(user){
+    
+    $state.go('persona.register', {usuario:user});
   }
 
 });
@@ -221,11 +246,26 @@ app.controller("controlLogin", function($scope, $auth, $state){
   
 });
 
-app.controller("controlRegister", function($scope, $http, $state){
+app.controller("controlRegister", function($scope, $http, $state, usuarioFactory, $stateParams){
     $scope.usuario = {};
     
+    console.info($stateParams);
+    if($stateParams.usuario==null){
+      $scope.usuario = {};
+      $scope.title = "Registrar un usuario";
+    }
+    else
+    {
+      $scope.usuario = $stateParams.usuario;
+      $scope.title = "Modificar un usuario";
+    }
+
+
     $scope.Registrar = function(){
-        $http.post('PHP/nexo.php', {datos: {accion:"registrar", usuario: $scope.usuario}})
+
+      //evaluo si es alta o modificacion
+      if($stateParams.usuario==null){
+        usuarioFactory.insertar($scope.usuario)
         .then(function(respuesta){
             console.log(respuesta.data);
             $state.go("persona.menu");
@@ -233,5 +273,17 @@ app.controller("controlRegister", function($scope, $http, $state){
              function(respuesta){
             console.error(respuesta);
         });
+      } else {
+        usuarioFactory.modificar($scope.usuario)
+        .then(function(respuesta){
+            console.log(respuesta.data);
+            $state.go("persona.menu");
+        },
+             function(respuesta){
+            console.error(respuesta);
+        });
+      }
+
+        
     }
 });

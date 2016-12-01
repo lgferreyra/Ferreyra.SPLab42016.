@@ -10,7 +10,7 @@ angular
       console.error(error);
     }
 
-    var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "ws/";
+    var url = window.location.protocol + "//" + window.location.host + window.location.pathname + "ws";
 
     function traerUrl(param){
         if(param==null){
@@ -89,8 +89,7 @@ angular
     }
 
     this.insertar = function(votacion){
-      console.log(votacion);
-      return $http.post(traerUrl("votacion/crear"), votacion)
+      return $http.post(traerUrl("votacion/"), votacion)
       .then(success,fail);
     }
   });

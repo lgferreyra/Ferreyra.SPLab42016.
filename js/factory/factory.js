@@ -22,12 +22,12 @@ angular
 	      	return usuarioService.borrar(id);
 	    }
 
-	    function modificar (votacion) {
-	    	return usuarioService.modificar(votacion);
+	    function modificar (usuario) {
+	    	return usuarioService.modificar(usuario);
 	    }
 
-	    function insertar (votacion) {
-	    	return usuarioService.insertar(votacion);
+	    function insertar (usuario) {
+	    	return usuarioService.insertar(usuario);
 	    }
   });
 

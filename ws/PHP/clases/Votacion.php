@@ -109,10 +109,10 @@ class Votacion
             sexo=:sexo
             WHERE id=:id");
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta->bindValue(':id',$votacion->id, PDO::PARAM_INT);
-        $consulta->bindValue(':dni', $votacion->dni, PDO::PARAM_STR);
-        $consulta->bindValue(':partido', $votacion->partido, PDO::PARAM_STR);
-        $consulta->bindValue(':sexo', $votacion->sexo, PDO::PARAM_STR);
+        $consulta->bindValue(':id',$votacion['id'], PDO::PARAM_INT);
+        $consulta->bindValue(':dni', $votacion['dni'], PDO::PARAM_STR);
+        $consulta->bindValue(':partido', $votacion['partido'], PDO::PARAM_STR);
+        $consulta->bindValue(':sexo', $votacion['sexo'], PDO::PARAM_STR);
         return $consulta->execute();
 	}
 

@@ -60,31 +60,30 @@ $app->get('/usuario[/{id}[/{name}]]', function ($request, $response, $args) {
     return $response;
 });
 /* POST: Para crear recursos */
-$app->post('/usuario[/{usuario}]', function ($request, $response, $args) {
+$app->post('/usuario[/]', function ($request, $response, $args) {
     $parsedBody = $request->getParsedBody();
     $idInserted = Usuario::InsertarUsuario($parsedBody);
-
     $response->write($idInserted);
-
     return $response;
 });
 
 // /* PUT: Para editar recursos */
-$app->put('/usuario/{id}', function ($request, $response, $args) {
-    $response->write("Welcome to Slim!");
-    var_dump($args);
-    var_dump($response);
-    var_dump($request);
+$app->put('/usuario[/]', function ($request, $response, $args) {
+    $parsedBody = $request->getParsedBody();
+    Usuario::Modificar($parsedBody);
+    $response->write("Usuario modificado");
     return $response;
 });
 
 // /* DELETE: Para eliminar recursos */
 $app->delete('/usuario/{id}', function ($request, $response, $args) {
-    $response->write("borrar !", $args->id);
-    var_dump($args);
+    $respuesta = Usuario::BorrarUsuario($args['id']);
+    $response->write($respuesta);
     return $response;
 });
 
+
+//PARA DEBUGEAR PONER UN VARDUMP Y RETORNAR LA RESPUESTA UNICAMENTE SIN ESCRIBIR EN ELLA.
 
 
 //*VOTACIONES*
@@ -107,7 +106,7 @@ $app->get('/votacion[/{id}]', function ($request, $response, $args) {
 });
 
 //POST: crear una votacion
-$app->post('/votacion/crear[/]', function ($request, $response, $args) {
+$app->post('/votacion[/]', function ($request, $response, $args) {
     $parsedBody = $request->getParsedBody();
     $idInserted = Votacion::Insertar($parsedBody);
     $response->write($idInserted);
